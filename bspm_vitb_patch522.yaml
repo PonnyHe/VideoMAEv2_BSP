@@ -1,0 +1,25 @@
+MODEL:
+  TYPE: vit
+  NAME: vit_base_patch522_1ch_bspm
+  PATCH_EMBED: patch_embed_bspm.PatchEmbed3D_BSPM
+  PATCH_SIZE: [5, 2, 2]
+  IN_CHANS: 1
+  IMG_SIZE: [125, 8, 28]
+  HIDDEN_DIM: 768
+  DEPTH: 12
+  NUM_HEADS: 12
+
+DATA:
+  DATASET: bspm
+  ROOT: /path/to/bspm_npy_dir
+  TRAIN_LIST: /path/to/train_list.txt
+
+TRAIN:
+  EPOCHS: 800
+  BASE_LR: 1.5e-4
+  WARMUP_EPOCHS: 40
+  BATCH_SIZE: 48
+  MASK_RATIO: 0.9   # VideoMAEv2 默认大mask率，适合MAE
+
+AUG:
+  # 若需要加入自定义 augmentation，之后可扩展这里
